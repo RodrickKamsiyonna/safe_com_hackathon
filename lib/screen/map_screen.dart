@@ -3,6 +3,7 @@ import 'package:safe_com/api/environ.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
+
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
 
@@ -14,9 +15,8 @@ class _MapScreenState extends State<MapScreen> {
   MapboxMapController? mapController;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     // TODO: implement initState
-    await loadDotenv();
     super.initState();
   }
   _onMapCreated(MapboxMapController controller) {
@@ -26,8 +26,9 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return MapboxMap(
-      styleString: MapboxStyles.LIGHT,
-      accessToken: dotenv.env['ACCESS_TOKEN'],
+      styleString: MapboxStyles.MAPBOX_STREETS,
+      myLocationEnabled: true,
+      accessToken: 'pk.eyJ1Ijoia2Ftc2lvY2VhbjEyMyIsImEiOiJjbG53NW91ankwNGJzMmxsZTYzcWw4bHp2In0.HJ8OsTO4hTaKc8csOUxr5g',
       onMapCreated: _onMapCreated,
       initialCameraPosition: const CameraPosition(target: LatLng(0.0, 0.0)),
     );

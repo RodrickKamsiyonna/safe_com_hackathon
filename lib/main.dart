@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:safe_com/api/async_link.dart';
 import 'package:safe_com/firebase_options.dart';
 import 'package:safe_com/screen/home.dart';
 import 'package:sensors_plus/sensors_plus.dart';
@@ -17,13 +18,11 @@ void main()  async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   accelerometerEvents.listen(
-
-
-
         (AccelerometerEvent event) {
          double threshold = 70;
          double accelerationMagnitude = event.x.abs() + event.y.abs() + event.z.abs();
          if (accelerationMagnitude>threshold){
+           SendDistress();
            Fluttertoast.showToast(
              msg: "Distress Sent",
              toastLength: Toast.LENGTH_SHORT,

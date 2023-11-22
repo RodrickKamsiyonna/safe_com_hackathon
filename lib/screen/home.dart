@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:safe_com/api/RequestProvider.dart';
+import 'package:safe_com/api/async_link.dart';
 
 import 'map_screen.dart';
 
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                          height:MediaQuery.of(context).size.height*0.13,
                          width:MediaQuery.of(context).size. width *0.1 ,
                         child: ListView.builder(
-                            itemCount: 2,
+                            itemCount: 4,
                             padding: EdgeInsets.all(0),
                             scrollDirection:  Axis.horizontal,
                             itemBuilder:(BuildContext context, int index){
@@ -106,8 +107,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 return Column(
                                   children: [
                                     Container(
-                                    width:60,
-                                    height:60,
+                                        margin: EdgeInsets.only(right:15),
+                                        padding: EdgeInsets.all(10),
+                                    width:70,
+                                    height:70,
                                     decoration: BoxDecoration(
                                            shape:BoxShape.circle,
                                            border:Border.all(
@@ -383,6 +386,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: MediaQuery.of(context).size.width*0.4,
                                                           child: MaterialButton(onPressed: (){
+                                                            SendDistress();
                                                             Fluttertoast.showToast(
                                                               msg: "Distress Sent",
                                                               toastLength: Toast.LENGTH_SHORT,
@@ -509,6 +513,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: MediaQuery.of(context).size.width*0.4,
                                                           child: MaterialButton(onPressed: (){
+                                                            SendDistress();
                                                             Fluttertoast.showToast(
                                                               msg: "Distress Sent",
                                                               toastLength: Toast.LENGTH_SHORT,
@@ -636,6 +641,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: MediaQuery.of(context).size.width*0.4,
                                                           child: MaterialButton(onPressed: (){
+                                                            SendDistress();
                                                             Fluttertoast.showToast(
                                                               msg: "Distress Sent",
                                                               toastLength: Toast.LENGTH_SHORT,
@@ -762,6 +768,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         SizedBox(
                                                           width: MediaQuery.of(context).size.width*0.4,
                                                           child: MaterialButton(onPressed: (){
+                                                            SendDistress();
                                                             Fluttertoast.showToast(
                                                               msg: "Distress Sent",
                                                               toastLength: Toast.LENGTH_SHORT,
@@ -879,19 +886,52 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   onChanged: handleRadioValueChanged,
                                                 ),
                                                 SizedBox(height: 20,),
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  width:double.infinity,
+                                                  child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: MediaQuery.of(context).size.width*0.4,
+                                                          child: MaterialButton(onPressed: (){
+                                                            SendDistress();
+                                                            Fluttertoast.showToast(
+                                                              msg: "Distress Sent",
+                                                              toastLength: Toast.LENGTH_SHORT,
+                                                              gravity: ToastGravity.BOTTOM,
+                                                              timeInSecForIosWeb: 1,
+                                                              backgroundColor: Colors.black,
+                                                              textColor: Colors.white,
+                                                              fontSize: 16.0,
+                                                            );
+                                                            Navigator.pop(context);  },
+                                                            padding: EdgeInsets.all(20),
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(10),
+                                                            ),
+                                                            height:40,
+                                                            textColor:Colors.white ,
+                                                            color:const Color(0xFF24064A),
+                                                            child: const Text("Send Distress",style: TextStyle( fontSize:12),),
+                                                          ),
+                                                        ),
 
-                                                MaterialButton(onPressed: (){     Navigator.pop(context);  },
-                                                  padding: EdgeInsets.all(20),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.circular(10),
+                                                        SizedBox(
+                                                          width: MediaQuery.of(context).size.width*0.4,
+                                                          child: MaterialButton(onPressed: (){     Navigator.pop(context);  },
+                                                            padding: EdgeInsets.all(20),
+                                                            shape: RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(10),
+                                                            ),
+                                                            height:40,
+                                                            textColor:Colors.white ,
+                                                            color:const Color(0xFF24064A),
+                                                            child: const Text("Cancel",style: TextStyle( fontSize:12),),
+                                                          ),),
+                                                      ]
                                                   ),
-                                                  height:40,
-                                                  minWidth: double.infinity,
-                                                  textColor:Colors.white ,
-                                                  color:const Color(0xFF24064A),
-                                                  child: const Text("Send Distress",style: TextStyle( fontSize:12),),
                                                 ),
-
                                               ],
                                             )
                                         );
@@ -982,6 +1022,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             SizedBox(
                                                               width: MediaQuery.of(context).size.width*0.4,
                                                               child: MaterialButton(onPressed: (){
+                                                                SendDistress();
                                                                 Fluttertoast.showToast(
                                                                   msg: "Distress Sent",
                                                                   toastLength: Toast.LENGTH_SHORT,
@@ -1315,7 +1356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: EdgeInsets.all(0),
                                   scrollDirection:  Axis.horizontal,
                                   itemBuilder:(BuildContext context1, int index, animated){
-                                    String  image = context1.select<RequestProvider,String>((value) => value.getImageByIndex(index));
+
                                     if(index== 0){
                                       return Column(
                                         children: [
